@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>ConfigCat Example by Cosmin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/configcat-js@latest/dist/configcat.min.js"
+    ></script>
+  </head>
+  <body>
+    <script>
+      let logger = configcat.createConsoleLogger(3);
+
+      var configCatClient = configcat.createClientWithAutoPoll(
+        "ZWPaCNNyLkaM9Xc8EDJ4Bg/63cPEOEepUezamE9fy4kpg",
+        {
+          pollIntervalSeconds: 2,
+          logger: logger,
+        }
+      );
+
+      var object1 = {
+        identifier: "Hans",
+        country: "Germany",
+        email: "Hans@cat.com",
+      };
+
+      var object2 = {
+        identifier: "Bogdan",
+        country: "Romania",
+        email: "Bogdan@cat.com",
+      };
+
+      configCatClient.getValue(
+        "myff",
+        false,
+        function (value) {
+          alert(
+            `${object1.identifier} is ${value ? "from" : "not from"} Germany`
+          );
+        },
+        object1
+      );
+
+      configCatClient.getValue(
+        "myff",
+        false,
+        function (value) {
+          alert(
+            `${object2.identifier} is ${value ? "from" : "not from"} Germany`
+          );
+        },
+        object2
+      );
+    </script>
+  </body>
+</html>
